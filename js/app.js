@@ -19,6 +19,7 @@ $(document).ready(function(){
 	var randomnumber = 0; // number generated from numberGenerator()
 	var clickedguess = 0; // user inputted guess
 	var difference = 0; // difference between random number and guess
+	var guessarray = []; // Stores guessed values which will be checked for any duplicates
 	
 	//Run Functions
 	numberGenerator();
@@ -33,6 +34,7 @@ function newGame() {
 		numberGenerator();
 		guessNumber = 0;
 		$('#count').text(guessNumber);
+		guessarray = [];
 	})
 }
 
@@ -51,6 +53,8 @@ function userGuess() {
 	$('#guessButton').click(function() {
 		clickedguess = $('#userGuess').val();
 		if(clickedguess >= 1 && clickedguess <= 100 && clickedguess % 1 == 0) {
+			//guessarray.push(clickedguess);
+			//console.log('Past guesses:' + guessarray);
 			displayguesses(clickedguess);	
 			$('#userGuess').val('');
 			guessNumber++;
@@ -78,6 +82,16 @@ function displayguesses(userinput) {
 //Function displays feedback
 function feedbackDisplay(feedback) {
 	$('#feedback').text(feedback);
+}
+//Function checks for duplicates
+function duplicatecheck(input1) {
+	if (guessarray.length > 1) {
+		for (var i = 0; i < guessarray.length(); i++) {
+			if (input1 === guessarray[i]) {
+				feedbackDisplay('You already tried this number! Guess again!');
+			}
+		}
+	}
 }
 //Function generates feedback based on difference
 function generateFeedback(variable1, variable2, variable3) {
