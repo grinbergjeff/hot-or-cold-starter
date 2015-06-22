@@ -59,6 +59,7 @@ function userGuess() {
 			//Calculate the difference between randomnumber and clicked guess
 			difference = Math.abs(randomnumber - clickedguess);
 			console.log('Difference is ' + difference);
+			generateFeedback(difference);
 		}
 		else {
 			feedbackDisplay('This is not a valid number!');
@@ -74,8 +75,28 @@ function displayguesses(userinput) {
 function feedbackDisplay(feedback) {
 	$('#feedback').text(feedback);
 }
-//Function checks if you are hot or cold
-/*function checkguess(variable) {
-	difference = Math.abs(randomnumber - variable);
-	console.log('Difference is ' + difference);
-}*/
+//Function generates feedback based on difference
+function generateFeedback(variable) {
+	if (variable >= 50) {
+		feedbackDisplay('Frozen!');
+	}
+	else if(variable >= 30 && variable < 50) {
+		feedbackDisplay('Brrrr it is chilly!');
+	}
+	else if(variable >= 20 && variable <= 29) {
+		feedbackDisplay('Not bad! Perfect neutral weather!');
+	}
+	else if(variable >= 10 && variable <= 19) {
+		feedbackDisplay('Warm!');
+	}
+	else if(variable >= 5 && variable <= 9) {
+		feedbackDisplay('Need an AC here! It is hot!');
+	}
+	else if(variable >= 1 && variable <= 4) {
+		feedbackDisplay('So close! I feel the heat of the sun!');
+	}
+	else {
+		feedbackDisplay('You got it! The number was ' + randomnumber);
+		winner = true;
+	}
+}
