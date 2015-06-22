@@ -16,7 +16,6 @@ $(document).ready(function(){
 	
 	//Initialize Variables
 	guessNumber = 0; // globalized
-	var winner = false;
 	var randomnumber = 0; // number generated from numberGenerator()
 	var clickedguess = 0; // user inputted guess
 	var difference = 0; // difference between random number and guess
@@ -25,16 +24,15 @@ $(document).ready(function(){
 	numberGenerator();
 	newGame();
 	userGuess();
-	//checkguess();
 });
 //Allows users to start a new game
 function newGame() {
 	$('.new').click(function() {
-	clearinputfield();
-	numberGenerator();
-	guessNumber = 0;
-	$('#count').text(guessNumber);
-	winner = false;
+		feedbackDisplay('Make your Guess!');
+		clearFields();
+		numberGenerator();
+		guessNumber = 0;
+		$('#count').text(guessNumber);
 	})
 }
 
@@ -44,8 +42,9 @@ function numberGenerator() {
 	console.log(randomnumber);
 }
 //Function clears input field (necessary for not reloading on new game
-function clearinputfield() {
+function clearFields() {
 	$('#userGuess').val('');
+	$('ul.guessBox li').remove();
 }
 //Function store guesses by clicking the guess button 
 function userGuess() {
@@ -59,7 +58,7 @@ function userGuess() {
 			//Calculate the difference between randomnumber and clicked guess
 			difference = Math.abs(randomnumber - clickedguess);
 			console.log('Difference is ' + difference);
-			generateFeedback(difference);
+			generateFeedback(difference, clickedguess, randomnumber);
 		}
 		else {
 			feedbackDisplay('This is not a valid number!');
@@ -76,27 +75,41 @@ function feedbackDisplay(feedback) {
 	$('#feedback').text(feedback);
 }
 //Function generates feedback based on difference
-function generateFeedback(variable) {
-	if (variable >= 50) {
+function generateFeedback(variable1, variable2, variable3) {
+	if (variable1 >= 50) {
 		feedbackDisplay('Frozen!');
 	}
-	else if(variable >= 30 && variable < 50) {
-		feedbackDisplay('Brrrr it is chilly!');
+	else if(variable1 >= 30 && variable1 < 50 && variable2 > variable3) {
+		feedbackDisplay('Brrrr it is chilly! Guess lower!');
 	}
-	else if(variable >= 20 && variable <= 29) {
-		feedbackDisplay('Not bad! Perfect neutral weather!');
+	else if(variable1 >= 30 && variable1 < 50 && variable2 < variable3) {
+		feedbackDisplay('Brrrr it is chilly! Guess higher!');
 	}
-	else if(variable >= 10 && variable <= 19) {
-		feedbackDisplay('Warm!');
+	else if(variable1 >= 20 && variable1 <= 29 && variable2 > variable3) {
+		feedbackDisplay('Nuetral! Guess lower!');
 	}
-	else if(variable >= 5 && variable <= 9) {
-		feedbackDisplay('Need an AC here! It is hot!');
+	else if(variable1 >= 20 && variable1 <= 29 && variable2 < variable3) {
+		feedbackDisplay('Neutral! Guess higher!');
 	}
-	else if(variable >= 1 && variable <= 4) {
-		feedbackDisplay('So close! I feel the heat of the sun!');
+	else if(variable1 >= 10 && variable1 <= 19 && variable2 > variable3)  {
+		feedbackDisplay('Warm! Guess lower!');
+	}
+	else if(variable1 >= 10 && variable1 <= 19 && variable2 < variable3)  {
+		feedbackDisplay('Warm! Guess higher!');
+	}
+	else if(variable1 >= 5 && variable1 <= 9 && variable2 > variable3) {
+		feedbackDisplay('Need an AC here! Guess lower');
+	}
+	else if(variable1 >= 5 && variable1 <= 9 && variable2 < variable3) {
+		feedbackDisplay('Need an AC here! Guess higher!');
+	}
+	else if(variable1 >= 1 && variable1 <= 4 && variable2 > variable3) {
+		feedbackDisplay("I'm melting! Aghhh! Guess lower!");
+	}
+	else if(variable1 >= 1 && variable1 <= 4 && variable2 < variable3) {
+		feedbackDisplay("I'm melting! Aghhh! Guess higher!");
 	}
 	else {
-		feedbackDisplay('You got it! The number was ' + randomnumber);
-		winner = true;
+		feedbackDisplay('You won! Start a new game!');
 	}
 }
