@@ -1,6 +1,5 @@
 
-$(document).ready(function(){
-/* Template Code Below */	
+$(document).ready(function(){	
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
@@ -12,57 +11,47 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
 
   	});
-/*Template Code Above*/
 	
-/*Code by Jeffrey Grinberg below: */
+/*Code Below by Jeffrey Grinberg: */
+	
 	//Initialize Variables
-	var guesscount = 0;
+	var guessNumber = 0;
+	var winner = false;
+	
 	//Run Functions
+	numberGenerator();
 	newGame();
-	//enterguess();
-	guessclick();
+	userGuess();
 });
 //Allows users to start a new game
 function newGame() {
-	$('.new').on('mousedown', '.new', function() {
+	$('.new').click(function() {
 	clearinputfield();
 	numbergenerator();
+	guessNumber = 0;
+	$('#count').text(guessNumber);
+	winner = false;
 	})
 }
 
 //Function to generate a random number from 1 to 100
-function numbergenerator() {
+function numberGenerator() {
 	var randomnumber = Math.floor((Math.random() * 101) + 1);
+	console.log(randomnumber);
 }
 //Function clears input field (necessary for not reloading on new game
 function clearinputfield() {
 	$('#userGuess').val('');
 }
-//Function store guesses by hitting enter
-/*function enterguess() {
-	$('#userGuess').keydown(function(ent) {
-		if (ent.which == 13) {
-			var enteredguess = $('#userGuess').val();
-			if(enteredguess >= 1 || enteredguess <= 100 || enteredguess % 1 == 0) {
-			displayguesses(enteredguess);
-			//Reset input field back to placeholder			
-			$(this).val('');
-			guesscount++;
-			}
-			else {
-				alert('This is not a valid number!')
-			}
-		}
-	})
-}*/
 //Function store guesses by clicking the guess button 
-function guessclick() {
-	$('#guessButton').on('mousedown', '#guessButton', function() {
+function userGuess() {
+	$('#guessButton').click(function() {
 		var clickedguess = $('#userGuess').val();
-		if(clickedguess >= 1 || clickedguess <= 100 || clickedguess % 1 == 0) {
-		displayguesses(clickedguess);
+		if(clickedguess >= 1 && clickedguess <= 100 && clickedguess % 1 == 0) {
+		displayguesses(clickedguess);	
 		$('#userGuess').val('');
-		guesscount++;
+		guessNumber+= 1;
+		$('#count').text(guessNumber);
 		}
 		else {
 			alert('This is not a valid number!')
@@ -71,8 +60,6 @@ function guessclick() {
 }
 //Function displays guesses
 function displayguesses(userinput) {
-	//display guess count number
-	$('#count').val(guesscount);
 	//display guess value
 	$('.guessBox').append('<li>' + userinput + '</li>');
 }
