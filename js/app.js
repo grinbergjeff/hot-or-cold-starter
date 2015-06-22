@@ -15,13 +15,17 @@ $(document).ready(function(){
 /*Code Below by Jeffrey Grinberg: */
 	
 	//Initialize Variables
-	guessNumber = 0;
+	guessNumber = 0; // globalized
 	var winner = false;
+	var randomnumber = 0; // number generated from numberGenerator()
+	var clickedguess = 0; // user inputted guess
+	var difference = 0; // difference between random number and guess
 	
 	//Run Functions
 	numberGenerator();
 	newGame();
 	userGuess();
+	//checkguess();
 });
 //Allows users to start a new game
 function newGame() {
@@ -36,7 +40,7 @@ function newGame() {
 
 //Function to generate a random number from 1 to 100
 function numberGenerator() {
-	var randomnumber = Math.floor((Math.random() * 101) + 1);
+	randomnumber = Math.floor((Math.random() * 101) + 1);
 	console.log(randomnumber);
 }
 //Function clears input field (necessary for not reloading on new game
@@ -46,15 +50,18 @@ function clearinputfield() {
 //Function store guesses by clicking the guess button 
 function userGuess() {
 	$('#guessButton').click(function() {
-		var clickedguess = $('#userGuess').val();
+		clickedguess = $('#userGuess').val();
 		if(clickedguess >= 1 && clickedguess <= 100 && clickedguess % 1 == 0) {
-		displayguesses(clickedguess);	
-		$('#userGuess').val('');
-		guessNumber++;
-		$('#count').text(guessNumber);
+			displayguesses(clickedguess);	
+			$('#userGuess').val('');
+			guessNumber++;
+			$('#count').text(guessNumber);
+			//Calculate the difference between randomnumber and clicked guess
+			difference = Math.abs(randomnumber - clickedguess);
+			console.log('Difference is ' + difference);
 		}
 		else {
-			alert('This is not a valid number!')
+			feedbackDisplay('This is not a valid number!');
 		}
 	})	
 }
@@ -63,3 +70,12 @@ function displayguesses(userinput) {
 	//display guess value
 	$('.guessBox').append('<li>' + userinput + '</li>');
 }
+//Function displays feedback
+function feedbackDisplay(feedback) {
+	$('#feedback').text(feedback);
+}
+//Function checks if you are hot or cold
+/*function checkguess(variable) {
+	difference = Math.abs(randomnumber - variable);
+	console.log('Difference is ' + difference);
+}*/
