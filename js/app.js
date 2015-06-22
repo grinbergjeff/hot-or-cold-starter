@@ -15,7 +15,7 @@ $(document).ready(function(){
 /*Code Below by Jeffrey Grinberg: */
 	
 	//Initialize Variables
-	var guessNumber = 0;
+	guessNumber = 0;
 	var winner = false;
 	
 	//Run Functions
@@ -27,7 +27,7 @@ $(document).ready(function(){
 function newGame() {
 	$('.new').click(function() {
 	clearinputfield();
-	numbergenerator();
+	numberGenerator();
 	guessNumber = 0;
 	$('#count').text(guessNumber);
 	winner = false;
@@ -50,7 +50,7 @@ function userGuess() {
 		if(clickedguess >= 1 && clickedguess <= 100 && clickedguess % 1 == 0) {
 		displayguesses(clickedguess);	
 		$('#userGuess').val('');
-		guessNumber+= 1;
+		guessNumber++;
 		$('#count').text(guessNumber);
 		}
 		else {
