@@ -81,37 +81,40 @@ function feedbackDisplay(feedback) {
 }
 //Function generates feedback based on difference
 function generateFeedback(variable1, variable2, variable3) {
-	if (variable1 >= 50) {
-		feedbackDisplay('Frozen!');
+	if (variable1 >= 50 && variable2 > variable3) {
+		feedbackDisplay('Frozen! Guess lower!');
 	}
-	else if(variable1 >= 30 && variable1 < 50 && variable2 > variable3) {
+	else if (variable1 >= 50 && variable2 < variable3) {
+		feedbackDisplay('Frozen! Guess higher!');
+	}
+	else if (variable1 >= 30 && variable1 < 50 && variable2 > variable3) {
 		feedbackDisplay('Brrrr it is chilly! Guess lower!');
 	}
-	else if(variable1 >= 30 && variable1 < 50 && variable2 < variable3) {
+	else if (variable1 >= 30 && variable1 < 50 && variable2 < variable3) {
 		feedbackDisplay('Brrrr it is chilly! Guess higher!');
 	}
-	else if(variable1 >= 20 && variable1 <= 29 && variable2 > variable3) {
+	else if (variable1 >= 20 && variable1 <= 29 && variable2 > variable3) {
 		feedbackDisplay('Nuetral! Guess lower!');
 	}
-	else if(variable1 >= 20 && variable1 <= 29 && variable2 < variable3) {
+	else if (variable1 >= 20 && variable1 <= 29 && variable2 < variable3) {
 		feedbackDisplay('Neutral! Guess higher!');
 	}
-	else if(variable1 >= 10 && variable1 <= 19 && variable2 > variable3)  {
+	else if (variable1 >= 10 && variable1 <= 19 && variable2 > variable3)  {
 		feedbackDisplay('Warm! Guess lower!');
 	}
-	else if(variable1 >= 10 && variable1 <= 19 && variable2 < variable3)  {
+	else if (variable1 >= 10 && variable1 <= 19 && variable2 < variable3)  {
 		feedbackDisplay('Warm! Guess higher!');
 	}
-	else if(variable1 >= 5 && variable1 <= 9 && variable2 > variable3) {
+	else if (variable1 >= 5 && variable1 <= 9 && variable2 > variable3) {
 		feedbackDisplay('Need an AC here! Guess lower');
 	}
-	else if(variable1 >= 5 && variable1 <= 9 && variable2 < variable3) {
+	else if (variable1 >= 5 && variable1 <= 9 && variable2 < variable3) {
 		feedbackDisplay('Need an AC here! Guess higher!');
 	}
-	else if(variable1 >= 1 && variable1 <= 4 && variable2 > variable3) {
+	else if (variable1 >= 1 && variable1 <= 4 && variable2 > variable3) {
 		feedbackDisplay("I'm melting! Aghhh! Guess lower!");
 	}
-	else if(variable1 >= 1 && variable1 <= 4 && variable2 < variable3) {
+	else if (variable1 >= 1 && variable1 <= 4 && variable2 < variable3) {
 		feedbackDisplay("I'm melting! Aghhh! Guess higher!");
 	}
 	else {
