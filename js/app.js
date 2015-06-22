@@ -59,6 +59,7 @@ function userGuess() {
 			difference = Math.abs(randomnumber - clickedguess);
 			console.log('Difference is ' + difference);
 			generateFeedback(difference, clickedguess, randomnumber);
+			return false;
 		}
 		else {
 			feedbackDisplay('This is not a valid number!');
