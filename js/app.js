@@ -62,6 +62,7 @@ function userGuess() {
 		}
 		else {
 			feedbackDisplay('This is not a valid number!');
+			return false;
 		}
 	})	
 }
