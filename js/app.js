@@ -61,6 +61,9 @@ function userGuess() {
 			generateFeedback(difference, clickedguess, randomnumber);
 			return false;
 		}
+		else if (clickedguess === '') {
+				//Show the bubble message showing where to input
+		}
 		else {
 			feedbackDisplay('This is not a valid number!');
 			return false;
