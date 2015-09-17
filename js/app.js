@@ -19,12 +19,12 @@ $(document).ready(function(){
 	var randomnumber = 0; // number generated from numberGenerator()
 	var clickedguess = 0; // user inputted guess
 	var difference = 0; // difference between random number and guess
-	var guessarray = []; // Stores guessed values which will be checked for any duplicates
+	var guessarray = [];
 	
 	//Run Functions
 	numberGenerator();
 	newGame();
-	userGuess();
+	userGuess(guessarray);
 });
 //Allows users to start a new game
 function newGame() {
@@ -49,12 +49,13 @@ function clearFields() {
 	$('ul.guessBox li').remove();
 }
 //Function store guesses by clicking the guess button 
-function userGuess() {
+function userGuess(argument1) {
 	$('#guessButton').click(function() {
 		clickedguess = $('#userGuess').val();
 		if(clickedguess >= 1 && clickedguess <= 100 && clickedguess % 1 == 0) {
-			//guessarray.push(clickedguess);
-			//console.log('Past guesses:' + guessarray);
+			argument1.push(clickedguess);
+			//duplicatecheck(clickedguess, guessarray);
+			console.log('Past guesses:' + argument1);
 			displayguesses(clickedguess);	
 			$('#userGuess').val('');
 			guessNumber++;
@@ -84,10 +85,11 @@ function feedbackDisplay(feedback) {
 	$('#feedback').text(feedback);
 }
 //Function checks for duplicates
-function duplicatecheck(input1) {
-	if (guessarray.length > 1) {
-		for (var i = 0; i < guessarray.length(); i++) {
-			if (input1 === guessarray[i]) {
+function duplicatecheck(input1, arrayname) {
+	//arrayname = arrayname.sort();
+	if (arrayname.length >= 1) {
+		for (var i = 0; i < arrayname.length(); i++) {
+			if (input1 === arrayname[i]) {
 				feedbackDisplay('You already tried this number! Guess again!');
 			}
 		}
@@ -108,7 +110,7 @@ function generateFeedback(variable1, variable2, variable3) {
 		feedbackDisplay('Brrrr it is chilly! Guess higher!');
 	}
 	else if (variable1 >= 20 && variable1 <= 29 && variable2 > variable3) {
-		feedbackDisplay('Nuetral! Guess lower!');
+		feedbackDisplay('Neutral! Guess lower!');
 	}
 	else if (variable1 >= 20 && variable1 <= 29 && variable2 < variable3) {
 		feedbackDisplay('Neutral! Guess higher!');
