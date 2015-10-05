@@ -41,7 +41,9 @@ function newGame() {
 //Function to generate a random number from 1 to 100
 function numberGenerator() {
 	randomnumber = Math.floor((Math.random() * 101) + 1);
-	console.log(randomnumber);
+	if (randomnumber == 100){
+		randomnumber = Math.floor((Math.random() * 101) + 1);
+	}
 }
 //Function clears input field (necessary for not reloading on new game
 function clearFields() {
